@@ -1,8 +1,15 @@
 [bot]
-adapters = ["alicebot.adapter.mirai"]
+adapters = ["alicebot.adapter.cqhttp"]
 plugin_dirs = ["plugins"]
+
+[adapter.cqhttp]
+# 这里是 CQHTTP 适配器的配置
+adapter_type = "ws"
+host = "127.0.0.1"
+port = 6700
+url = ""
 
 [adapter.mirai]
 adapter_type = "ws"
 verify_key = "1234567890"
-qq = 234465553
+qq = 3490109344

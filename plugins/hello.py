@@ -28,6 +28,7 @@ class Hello(Plugin):
     block: bool = False
 
     async def handle(self) -> None:
+
         if not requestauth(self.event.sender.group.id, 'hello'):
             await self.event.reply('在当前群组中未开启此功能')
             return
@@ -96,10 +97,13 @@ class Hello(Plugin):
     async def rule(self) -> bool:
         try:
             message_chain = self.event.message.as_message_chain()
-            tp = self.event.get_plain_text()
+            # tp = self.event.get_plain_text()
+            # text  = self.event.message.get_plain_text()
             text = message_chain[1]['text'].strip()
             return text in ['/hello', '/heartbeat',
                             '/命运的天秤', '/test', '/news', '/temp'] or text.startswith(
                 '/exec') or text.startswith('/say') or text.startswith('/help')
-        except:
+        except Exception as e:
+            print(self.event.message.get_segment_class())
+            print(e)
             return False

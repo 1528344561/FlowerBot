@@ -1,14 +1,14 @@
 from filemanage import *
 import os
 
-self_QQ = '234465553'
-super_admin = '2496097294'
+self_QQ = '3490109344'
+super_admin = '1528344561'
 
 blacklist = syncfrom('blacklist.json', [])
-admin_QQ = syncfrom('admin.json', ['2496097294'])
-groupauth = syncfrom('groupauth.json', {})
+admin_QQ = syncfrom('admin.json', ['1528344561'])
+groupauth = syncfrom('groupauth.json', {186650075})
 
-MAINPATH = 'C:\\Users\Administrator\Downloads\\flowerbot'
+MAINPATH = 'C:\\Users\\1\Desktop\Project\FlowerBot\\'
 try:
     os.listdir(MAINPATH)
 except:
