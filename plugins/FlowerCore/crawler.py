@@ -8,7 +8,8 @@ def link(problem):
     try:
         return "https://codeforces.com/problemset/problem/" + str(problem['contestId']) + '/' + str(
             problem['index'])
-    except KeyError:
+    # except KeyError:
+    except Exception as e:
         return str(problem)
 
 
@@ -42,9 +43,11 @@ def fetch_problems() -> bool:
     global problems
     for cnt in range(10):
         try:
-            problems = (requests.get('https://codeforces.com/api/problemset.problems').json())['result']['problems']
+            header={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36'}
+            problems = (requests.get('https://codeforces.com/api/problemset.problems',headers=header).json())['result']['problems']
             return True
-        except BaseException:
+        except Exception as e:
+            print(e)
             pass
     return False
 
@@ -54,7 +57,7 @@ def daily_problem():
     res = []
     for x in problems:
         try:
-            if x['rating'] <= DAILY_UPPER_BOUND:
+            if x['rating'] <= DAILY_UPPER_BOUND and '*special_problem' not in x['tags']:
                 res.append(x)
         except KeyError:
             pass
@@ -108,6 +111,8 @@ def request_problem(tags, excluded_problems=None):
                     continue
                 if y[1:] in x['tags']:
                     flag = 0
+        if '*special_problem' in x['tags']:
+            flag = 0
         if not flag:
             continue
         if x['rating'] == rating:
