@@ -1,5 +1,5 @@
 [bot]
-adapters = ["alicebot.adapter.cqhttp"]
+adapters = ["alicebot.adapter.mirai"]
 plugin_dirs = ["plugins"]
 
 [adapter.cqhttp]
@@ -12,4 +12,12 @@ url = ""
 [adapter.mirai]
 adapter_type = "ws"
 verify_key = "1234567890"
+port = 7701
 qq = 3490109344
+
+
+#[adapter.mirai]
+#adapter_type = "reverse-ws"
+#verify_key = "1234567890"
+#port = 7702
+#qq = 3490109344

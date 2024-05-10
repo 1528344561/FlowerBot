@@ -7,17 +7,23 @@
 #verify_key = "1234567890"
 #qq = 3069244614
 [bot]
-adapters = ["alicebot.adapter.cqhttp"]
+adapters = ["alicebot.adapter.mirai"]
 plugin_dirs = ["plugins"]
 
-[adapter.cqhttp]
-# 这里是 CQHTTP 适配器的配置
-adapter_type = "ws"
-host = "127.0.0.1"
-port = 6700
-url = ""
+#[adapter.cqhttp]
+## 这里是 CQHTTP 适配器的配置
+#adapter_type = "ws"
+#host = "127.0.0.1"
+#port = 6700
+#url = ""
 
 [adapter.mirai]
 adapter_type = "ws"
 verify_key = "1234567890"
 qq = 3490109344
+
+#[adapter.mirai]
+#adapter_type = "reverse-ws"
+#verify_key = "1234567890"
+#port = 7702
+#qq = 3490109344

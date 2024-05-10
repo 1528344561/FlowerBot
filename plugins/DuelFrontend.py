@@ -40,7 +40,7 @@ class DuelFrontend(Plugin):
             message_chain = self.event.message.as_message_chain()
             text = to_text(message_chain)
             command = executer.interpret(text)
-            if not command[-1]:
+            if command and not command[-1]:
                 msg = '本条指令被解析为：/'
                 for x in command[1]: msg += x + ' '
                 await self.event.reply(msg)

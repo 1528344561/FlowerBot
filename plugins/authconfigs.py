@@ -62,6 +62,7 @@ manuel = {
 """,
              """/duel daily problem 访问今天的每日挑战题目
 通过每日挑战题目可以得到相应的积分
+/duel daily finish 判断每日挑战题目结果
 /duel daily ranklist 可以查询总积分排行""",
              """/duel ongoing: 查询正在进行的单挑
 /duel query @p：查询用户 p 的 ELO rating
@@ -101,6 +102,8 @@ def ban(group, plug):
 
 
 def active(group, plug):
+    if not group in groupauth:
+        groupauth[group] = set()
     groupauth[group].remove(plug)
     syncto('groupauth.json', groupauth)
 

@@ -84,8 +84,13 @@ class Flower:
             return '参数非法。'
         if sender.bind is not None:
             return '你正在绑定一个账号，请先输入 /bind finish 结束绑定'
+        # for x in cls.binding:
+        #     if CF_id == x.CF_id:
+        #         cls.binding.remove(x)
+        #         return '进行中的 {} 的绑定会话被重置.'.format(CF_id)
         if CF_id in [x.CF_id for x in cls.binding]:
             return '有人正在绑定这个账号'
+
         new_bind = bind.CFBindAction(sender, CF_id)
         cls.binding.append(new_bind)
         sender.bind = new_bind
@@ -97,9 +102,11 @@ class Flower:
         if sender.bind is None:
             return '你好像没有在绑定账号啊'
         result = sender.bind.check()
-        sender.bind = None
+        # print('here',sender.bind,cls.binding)
         if sender.bind in cls.binding:
             cls.binding.remove(sender.bind)
+        sender.bind = None
+
         if result != 1:
             return {-1: "未在规定时间内提交", -2: "没有发现符合要求的提交", -3: "网络错误，请稍后再试"}[result]
         cls.user_list[sender.qq] = sender

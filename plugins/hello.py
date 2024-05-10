@@ -8,9 +8,9 @@ from alicebot.adapter.mirai.message import MiraiMessageSegment
 
 from authconfigs import *
 
-HelloMessage = """你好!我是 flower，一个 Codeforces/Atcoder Duel Bot，你可以在这里绑定你的 CF 
+HelloMessage = """你好!我是 24Records，一个 Codeforces/Atcoder Duel Bot，你可以在这里绑定你的 CF 
 账号，向其它绑定了账号的用户发起单挑，而我将作为你们的裁判。具体用法请输入 /help 。 
-我的主人是 EternalAlexander(2496097294)，有问题请 qq 咨询。
+我的主人是 Welcome24ever (1091465321)，有问题请 qq 咨询。
 
 github 地址：https://github.com/EternalAlexander/FlowerBot
 使用框架为 Mirai (https://github.com/mamoe/mirai) 和 Alicebot (https://docs.alicebot.dev/)。

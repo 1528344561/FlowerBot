@@ -57,11 +57,12 @@ def daily_problem():
     res = []
     for x in problems:
         try:
-            if x['rating'] <= DAILY_UPPER_BOUND and '*special_problem' not in x['tags']:
+            if x['rating'] <= DAILY_UPPER_BOUND and '*special' not in x['tags']:
                 res.append(x)
         except KeyError:
             pass
     seed = (t.tm_year * 10000 + t.tm_mon * 33 * t.tm_mday) % len(res)
+    print(res[seed]['tags'])
     return res[seed]
 
 
@@ -111,7 +112,7 @@ def request_problem(tags, excluded_problems=None):
                     continue
                 if y[1:] in x['tags']:
                     flag = 0
-        if '*special_problem' in x['tags']:
+        if '*special' in x['tags'] and '!*special_problem' not in tags:
             flag = 0
         if not flag:
             continue
