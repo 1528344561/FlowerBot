@@ -74,6 +74,8 @@ class Hello(Plugin):
             try:
                 requests.get('https://codeforces.com/api/user.status?handle=Fefer_Ivan&from=1&count=10',
                              timeout=5).json()
+                # requests.get('https://codeforc.es/api/user.status?handle=Fefer_Ivan&from=1&count=10',
+                #              timeout=5).json()
             except:
                 CF = '失败'
             try:

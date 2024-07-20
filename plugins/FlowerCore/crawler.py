@@ -1,5 +1,6 @@
 import random
 import time
+import json
 import requests
 from plugins.FlowerCore.configs import *
 
@@ -14,8 +15,11 @@ def link(problem):
 
 
 def get_recent_submission(CF_id):
+    if not CF_id:
+        return '请先绑定账号'
     try:
         json = requests.get('https://codeforces.com/api/user.status?handle={:s}&from=1&count=1'.format(CF_id)).json()
+        # json = requests.get('https://codeforc.es/api/user.status?handle={:s}&from=1&count=1'.format(CF_id)).json()
         print(json)
         if json['status'] == 'FAILED':
             return None
@@ -41,15 +45,25 @@ problems = []
 
 def fetch_problems() -> bool:
     global problems
+    # cookies={
+    #     '39ce7':'CFS3dMfB',
+    #     "JSESSIONID":'F78C406FFAEE17367C818CEE7363C416',
+    #     "cf_clearance":"uhy.KAFzUqdYLpK0IDtDSGknBCFEHCF2YJN9B9e2NjE-1717167284-1.0.1.1-Y2fvzaDYVBU0DIsrHcWYcBw_H.tkqomwxbtnX8ozFSTj2KyJsRlsGrlGlEioynL1oWiuAwjQTKdNunBmTUsBMA"
+    # }
     for cnt in range(10):
         try:
             header={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36'}
             problems = (requests.get('https://codeforces.com/api/problemset.problems',headers=header).json())['result']['problems']
+            
+            # problems = (requests.get('https://codeforc.es/api/problemset.problems',headers=header).json())['result']['problems']
             return True
         except Exception as e:
             print(e)
             pass
-    return False
+    with open('./cf.txt','r',encoding='utf-8')as fp:
+        txt = fp.read()
+    problems = json.loads(txt)['result']['problems']
+    return True
 
 
 def daily_problem():
@@ -70,6 +84,7 @@ def problem_record(user):
     try:
         try:
             d = requests.get('https://codeforces.com/api/user.status?handle=' + user, timeout=5)
+            # d = requests.get('https://codeforc.es/api/user.status?handle=' + user, timeout=5)
         except TimeoutError:
             return set()
         JSON = d.json()

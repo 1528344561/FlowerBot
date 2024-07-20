@@ -138,7 +138,7 @@ class Flower:
         cls.index += 1
         new_duel = duel.Duel(sender, target, tags, cls.index)
         cls.duels.append(new_duel)
-        return "{:s} 挑战了 {:s}, 应战请输入 /duel accept，拒绝请输入 /duel decline".format(sender.name(), target.name())
+        return "{:s} 挑战了 {:s}, 应战请输入 /duel accept，拒绝请输入 /duel decline. 取消对战邀请请输入/duel cancel.".format(sender.name(), target.name())
 
     @classmethod
     def accept(cls, sender, *args):
@@ -366,6 +366,8 @@ class Flower:
         day = (lambda x: [x.year, x.month, x.day])(datetime.datetime.now())
         if day in sender.daily_passed:
             return '你已经通过了今天的每日挑战'
+        if sender.CF_id is None:
+                return '你还未绑定账号，先用/bind begin your_cf_id 绑定账号'
         submission = crawler.get_recent_submission(sender.CF_id)
         if submission is None:
             return '网络错误，请稍后再试'
